@@ -1,6 +1,9 @@
+import React from "react";
+import { Card, CardBody, CardTitle, CardText } from "reactstrap";
+
 /** Displays info about a single job */
 
-const JobCard = ({ id, title, salary, equity, company }) => {
+const JobCard = ({ id, title, salary, equity, companyName }) => {
     // need to change the following so if it's in company detail page it doesn't show company name
     return (
         <section>
@@ -10,7 +13,7 @@ const JobCard = ({ id, title, salary, equity, company }) => {
                         {title}
                     </CardTitle>
                     <CardText className="font-italic">
-                        {company.name}
+                        {companyName}
                     </CardText>
                     <ul>
                         <li>Salary: {salary}</li>

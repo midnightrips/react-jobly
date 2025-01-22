@@ -3,14 +3,14 @@ import "./NavBar.css";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 
-function NavBar({ user = {} }) {
+function NavBar({ curr_user }) {
     return (
         <div>
             <Navbar expand="md">
                 <NavLink exact to="/" className="navbar-brand">
                     Jobly
                 </NavLink>
-                {user ?
+                {curr_user ?
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <NavLink to="/companies">Companies</NavLink>
@@ -22,7 +22,7 @@ function NavBar({ user = {} }) {
                             <NavLink to="/profile">Profile</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink to="/logout">{`Logout ${user.username}`}</NavLink>
+                            <NavLink to="/logout">{`Logout ${curr_user.username}`}</NavLink>
                         </NavItem>
                     </Nav>
                     :

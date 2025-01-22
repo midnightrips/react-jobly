@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import JoblyApi from "./api";
-import { useParams, Link } from "react-router";
+import { Link } from "react-router";
 import { ListGroupItem } from "reactstrap";
 
 /** CompanyList: displays list of companies */
@@ -12,7 +12,7 @@ const CompanyList = () => {
     useEffect(() => {
         const fetchCompanies = async () => {
             try {
-                const data = JoblyApi.getCompanies({ nameLike: searchTerm });
+                const data = await JoblyApi.getCompanies({ nameLike: searchTerm });
                 setCompanies(data);
             } catch (err) {
                 console.error("Error fetching companies", err);

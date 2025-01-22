@@ -11,7 +11,7 @@ const JobList = () => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const data = JoblyApi.getJobs({ nameLike: searchTerm });
+                const data = await JoblyApi.getJobs({ nameLike: searchTerm });
                 setJobs(data);
             } catch (err) {
                 console.error("Error fetching jobs", err);
@@ -33,7 +33,7 @@ const JobList = () => {
             title={job.title}
             salary={job.salary}
             equity={job.equity}
-            company={job.company}
+            companyName={job.companyName}
         />
     ));
 
