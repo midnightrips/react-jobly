@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 /** Signup: displays signup form and handles submission */
 
@@ -22,7 +23,7 @@ const SignupForm = ({ signup }) => {
 
     const gatherInput = evt => {
         evt.preventDefault();
-        signup({ ...formData });//formData.username, formData.password, formData.firstName, formData.lastName, formData.email);
+        signup({ ...formData });
         setFormData({
             username: "",
             password: "",
@@ -30,6 +31,7 @@ const SignupForm = ({ signup }) => {
             lastName: "",
             email: ""
         });
+        return <Navigate to='/' />;
     };
 
     return (

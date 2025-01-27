@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 /** Login: displays login form and handles submission */
 
@@ -23,6 +24,7 @@ const LoginForm = ({ login }) => {
             username: "",
             password: ""
         });
+        return <Navigate to='/' />;
     };
 
     return (

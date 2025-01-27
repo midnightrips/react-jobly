@@ -6,10 +6,11 @@ import RoutesList from './RoutesList';
 import JoblyApi from './api';
 import { jwtDecode } from 'jwt-decode';
 import UserContext from './UserContext';
+import { useLocalStorage } from './hooks';
 
 function App() {
   const [curr_user, setCurr_User] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useLocalStorage(null, 'token');
 
   useEffect(() => {
     if (!token) {
@@ -22,6 +23,7 @@ function App() {
 
     // Set the current user with username and isAdmin
     setCurr_User({ username, isAdmin });
+
   }, [token]);
 
   const login = async (username, password) => {
