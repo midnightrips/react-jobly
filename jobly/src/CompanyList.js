@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import JoblyApi from "./api";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ListGroupItem } from "reactstrap";
 
 /** CompanyList: displays list of companies */
 
-const CompanyList = () => {
+const CompanyList = ({ curr_user }) => {
     const [companies, setCompanies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!curr_user) {
+            navigate("/");
+            return;
+        }
+
         const fetchCompanies = async () => {
             try {
                 const data = await JoblyApi.getCompanies({ nameLike: searchTerm });
@@ -19,7 +25,7 @@ const CompanyList = () => {
             }
         }
         fetchCompanies();
-    }, [searchTerm]);
+    }, [searchTerm, curr_user, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,7 +50,6 @@ const CompanyList = () => {
                         <b>{company.name}</b>
                         <p>{company.description}</p>
                     </ListGroupItem>
-
                 </Link>
             ))}
         </div>

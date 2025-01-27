@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useResolvedPath } from "react-router-dom";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -61,7 +62,7 @@ class JoblyApi {
 
   static async register(user) {
     let res = await this.request('auth/register', user, "post");
-    return res.token
+    return res.token;
   }
 
   /** Authenticate a user (login) */
@@ -78,6 +79,12 @@ class JoblyApi {
     return res.user;
   }
 
+  /** Edit (patch) user information */
+
+  static async editUserInfo(username, { firstName, lastName, email }) {
+    let res = await this.request(`users/${username}`, { firstName, lastName, email }, "patch");
+    return res.user;
+  }
 }
 
 // for now, put token ("testuser" / "password" on class)

@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import JobCard from "./JobCard";
+import { useNavigate } from "react-router-dom";
 
 /** JobList: displays list of jobs */
 
-const JobList = () => {
+const JobList = ({ curr_user }) => {
     const [jobs, setJobs] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!curr_user) {
+            navigate("/");
+            return;
+        }
+
         const fetchJobs = async () => {
             try {
                 const data = await JoblyApi.getJobs({ nameLike: searchTerm });
@@ -18,7 +25,7 @@ const JobList = () => {
             }
         }
         fetchJobs();
-    }, [searchTerm]);
+    }, [searchTerm, curr_user, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

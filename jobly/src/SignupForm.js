@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /** Signup: displays signup form and handles submission */
 
@@ -12,6 +12,7 @@ const SignupForm = ({ signup }) => {
         lastName: "",
         email: ""
     });
+    const navigate = useNavigate();
 
     const handleChange = evt => {
         const { name, value } = evt.target;
@@ -31,7 +32,7 @@ const SignupForm = ({ signup }) => {
             lastName: "",
             email: ""
         });
-        return <Navigate to='/' />;
+        navigate("/");
     };
 
     return (
