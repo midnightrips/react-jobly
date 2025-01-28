@@ -35,8 +35,6 @@ function App() {
   useEffect(() => {
     if (!curr_user || !curr_user.username) return; // Wait until curr_user is fully initialized
 
-    console.log(curr_user);
-
     const fetchUserInfo = async () => {
       try {
         const userInfo = await JoblyApi.getUserInfo(curr_user.username);

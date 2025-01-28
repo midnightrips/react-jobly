@@ -10,29 +10,37 @@ const JobList = ({ curr_user }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
+    // Redirect if user is not logged in
     useEffect(() => {
         if (!curr_user) {
             navigate("/");
-            return;
         }
-
-        const fetchJobs = async () => {
+        const fetchAllJobs = async () => {
             try {
-                const data = await JoblyApi.getJobs({ nameLike: searchTerm });
+                const data = await JoblyApi.getJobs();
                 setJobs(data);
             } catch (err) {
-                console.error("Error fetching jobs", err);
+                console.error("Error fetching all jobs", err);
             }
-        }
-        fetchJobs();
-    }, [searchTerm, curr_user, navigate]);
+        };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const search = formData.get("searchTerm").trim();
-        setSearchTerm(search);
-    }
+        fetchAllJobs();
+    }, [curr_user, navigate]);
+
+    // Handle input change
+    const handleChange = (evt) => {
+        setSearchTerm(evt.target.value);
+    };
+
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        try {
+            const data = await JoblyApi.getJobs(searchTerm);
+            setJobs(data);
+        } catch (err) {
+            console.error("Error fetching jobs", err);
+        }
+    };
 
     const jobCards = jobs.map(job => (
         <JobCard
@@ -48,12 +56,21 @@ const JobList = ({ curr_user }) => {
 
     return (
         <div>
-            <form onClick={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
-                    <input class="form-control form-control-lg" name="searchTerm" placeholder="Enter search term.." value="" />
+                    <input
+                        onChange={handleChange}
+                        className="form-control form-control-lg"
+                        name="searchTerm"
+                        placeholder="Enter search term.."
+                    />
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                    <button
+                        type="submit"
+                        className="btn btn-lg btn-primary">
+                        Submit
+                    </button>
                 </div>
             </form>
             {jobCards}

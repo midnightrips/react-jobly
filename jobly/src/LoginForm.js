@@ -17,7 +17,7 @@ const LoginForm = ({ login }) => {
         }));
     };
 
-    const gatherInput = evt => {
+    const gatherInput = async (evt) => {
         evt.preventDefault();
         login(formData.username, formData.password);
         setFormData({
