@@ -49,6 +49,7 @@ const Profile = ({ editUser, curr_user }) => {
                 <div>
                     <label htmlFor="username">Username</label>
                     <input
+                        readOnly
                         type="text"
                         name="username"
                         value={formData.username}

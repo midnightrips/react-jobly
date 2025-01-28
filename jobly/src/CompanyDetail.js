@@ -32,12 +32,13 @@ const CompanyDetail = ({ curr_user }) => {
 
     const jobCards = jobs.map(job => (
         <JobCard
+            curr_user={curr_user}
             key={job.id}
             id={job.id}
             title={job.title}
             salary={job.salary}
             equity={job.equity}
-            company={job.company}
+            companyName={job.company}
         />
     ));
 
