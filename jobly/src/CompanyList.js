@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import JoblyApi from "./api";
 import { Link, useNavigate } from "react-router";
 import { ListGroupItem } from "reactstrap";
+import UserContext from "./UserContext";
 
 /** CompanyList: displays list of companies */
 
-const CompanyList = ({ curr_user }) => {
+const CompanyList = () => {
     const [companies, setCompanies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const { curr_user } = useContext(UserContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,7 +40,7 @@ const CompanyList = ({ curr_user }) => {
         <div>
             <form onClick={handleSubmit}>
                 <div>
-                    <input class="form-control form-control-lg" name="searchTerm" placeholder="Enter search term.." value="" />
+                    <input className="form-control form-control-lg" name="searchTerm" placeholder="Enter search term.." value="" />
                 </div>
                 <div>
                     <button type="submit" class="btn btn-lg btn-primary">Submit</button>

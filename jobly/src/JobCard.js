@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 import JoblyApi from "./api";
+import UserContext from "./UserContext";
 
 /** Displays info about a single job */
 
-const JobCard = ({ curr_user, id, title, salary, equity, companyName, applied = false }) => {
-    // const [applied, setApplied] = useState(false);
-    //if this job is in the list of applications, set applied to true
-    // setApplied(id in curr_user.applications); // causing too many re-renders
+const JobCard = ({ id, title, salary, equity, companyName }) => {
+    const [applied, setApplied] = useState(false);
 
-    if (id in curr_user.applications) applied = true;
+    const { curr_user } = useContext(UserContext);
+
+    useEffect(() => {
+        if (curr_user.applications.some(jobId => jobId === id)) setApplied(true);
+    }, [curr_user.applications]);
 
     const gatherInput = async (evt) => {
         evt.preventDefault();
         try {
             const data = await JoblyApi.apply(curr_user.username, id);
             console.log(`Application to job #${data} successful.`);
-            // setApplied(true);
         } catch (err) {
             console.error("Error applying to job", err);
         }

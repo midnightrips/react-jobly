@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import JoblyApi from "./api";
 import JobCard from "./JobCard";
 import { useNavigate, useParams } from "react-router-dom";
+import UserContext from "./UserContext";
 
 /** CompanyDetail: displays a company's description and list of jobs at that company */
 
-const CompanyDetail = ({ curr_user }) => {
+const CompanyDetail = () => {
     const params = useParams();
     const handle = params.handle;
     const [jobs, setJobs] = useState([]);
     const [company, setCompany] = useState({});
     const navigate = useNavigate();
+    const { curr_user } = useContext(UserContext);
 
     useEffect(() => {
         if (!curr_user) {
@@ -32,7 +34,6 @@ const CompanyDetail = ({ curr_user }) => {
 
     const jobCards = jobs.map(job => (
         <JobCard
-            curr_user={curr_user}
             key={job.id}
             id={job.id}
             title={job.title}

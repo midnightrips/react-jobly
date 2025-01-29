@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import JoblyApi from "./api";
 import JobCard from "./JobCard";
 import { useNavigate } from "react-router-dom";
+import UserContext from "./UserContext";
 
 /** JobList: displays list of jobs */
 
-const JobList = ({ curr_user }) => {
+const JobList = () => {
     const [jobs, setJobs] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+
+    const { curr_user } = useContext(UserContext);
     const navigate = useNavigate();
 
     // Redirect if user is not logged in
@@ -44,7 +47,6 @@ const JobList = ({ curr_user }) => {
 
     const jobCards = jobs.map(job => (
         <JobCard
-            curr_user={curr_user}
             key={job.id}
             id={job.id}
             title={job.title}

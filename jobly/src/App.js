@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
 import NavBar from './NavBar';
 import RoutesList from './RoutesList';
 import JoblyApi from './api';
 import { jwtDecode } from 'jwt-decode';
-import UserContext from './UserContext';
 import { useLocalStorage } from './hooks';
+import UserContext from './UserContext';
 
 function App() {
-  const [curr_user, setCurr_User] = useState(null);
   const [token, setToken] = useLocalStorage(null, 'token');
+
+  const { curr_user, setCurr_User } = useContext(UserContext);
 
   useEffect(() => {
     if (token) {
@@ -85,14 +86,12 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ curr_user, login, signup, logout, editUser }}>
-        <BrowserRouter>
-          <NavBar curr_user={curr_user} />
-          <main>
-            <RoutesList signup={signup} login={login} logout={logout} editUser={editUser} curr_user={curr_user} />
-          </main>
-        </BrowserRouter>
-      </UserContext.Provider>
+      <BrowserRouter>
+        <NavBar curr_user={curr_user} />
+        <main>
+          <RoutesList signup={signup} login={login} logout={logout} editUser={editUser} curr_user={curr_user} />
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
