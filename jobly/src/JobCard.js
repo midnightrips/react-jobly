@@ -19,6 +19,7 @@ const JobCard = ({ id, title, salary, equity, companyName }) => {
         try {
             const data = await JoblyApi.apply(curr_user.username, id);
             console.log(`Application to job #${data} successful.`);
+            setApplied(true);
         } catch (err) {
             console.error("Error applying to job", err);
         }

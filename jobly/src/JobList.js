@@ -78,7 +78,15 @@ const JobList = () => {
                     </div>
                 </div>
             </form>
-            {jobCards}
+            {jobs.length
+                ? (
+                    <div>
+                        {jobCards}
+                    </div>
+                ) : (
+                    <p className="lead white-letters">Sorry, no results were found!</p>
+                )
+            }
         </div>
     );
 }

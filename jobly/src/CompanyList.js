@@ -87,7 +87,7 @@ const CompanyList = () => {
                         ))}
                     </div>
                 ) : (
-                    <p className="lead">Sorry, no results were found!</p>
+                    <p className="lead white-letters">Sorry, no results were found!</p>
                 )}
         </div>
     );
