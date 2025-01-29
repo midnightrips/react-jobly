@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./Home";
+import Homepage from "./Home";
 import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
 import LoginForm from "./LoginForm";
@@ -15,7 +15,7 @@ import Logout from "./Logout";
 const RoutesList = ({ signup, login, logout, editUser, curr_user }) => {
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/companies" element={<CompanyList />} />
             <Route path="/companies/:handle" element={<CompanyDetail />} />
             <Route path="/jobs" element={<JobList />} />

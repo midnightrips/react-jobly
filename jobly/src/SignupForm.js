@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Form.css";
 
 /** Signup: displays signup form and handles submission */
 
@@ -36,61 +37,76 @@ const SignupForm = ({ signup }) => {
     };
 
     return (
-        <div>
-            <h2>Sign Up</h2>
-            <form onSubmit={gatherInput}>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        onChange={handleChange}
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        id="username"
-                    />
+        <div className="Form">
+            <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                <h2 className="mb-3">Sign Up</h2>
+                <div className="card">
+                    <div className="card-body">
+                        <form onSubmit={gatherInput}>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="username"><b>Username</b></label>
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    name="username"
+                                    value={formData.username}
+                                    id="username"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="password"><b>Password</b></label>
+                                <input
+                                    onChange={handleChange}
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    id="password"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="firstName"><b>First name</b></label>
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    id="firstName"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="lastName"><b>Last name</b></label>
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    id="lastName"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="email"><b>Email</b></label>
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    name="email"
+                                    value={formData.email}
+                                    id="email"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="d-grid">
+                                <button className="btn btn-primary">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        onChange={handleChange}
-                        type="text"
-                        name="password"
-                        value={formData.password}
-                        id="password"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="firstName">First name</label>
-                    <input
-                        onChange={handleChange}
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        id="firstName"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="lastName">Last name</label>
-                    <input
-                        onChange={handleChange}
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        id="lastName"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        onChange={handleChange}
-                        type="text"
-                        name="email"
-                        value={formData.email}
-                        id="email"
-                    />
-                </div>
-                <button id="signupBtn">Submit</button>
-            </form>
+            </div>
         </div>
     );
 }

@@ -3,6 +3,7 @@ import JoblyApi from "./api";
 import JobCard from "./JobCard";
 import { useNavigate, useParams } from "react-router-dom";
 import UserContext from "./UserContext";
+import "./CompanyDetail.css";
 
 /** CompanyDetail: displays a company's description and list of jobs at that company */
 
@@ -44,8 +45,8 @@ const CompanyDetail = () => {
     ));
 
     return (
-        <div>
-            <h3>{company.name}</h3>
+        <div className="CompanyDetail col-md-8 offset-md-2">
+            <h3 className="mb-3">{company.name}</h3>
             <p>{company.description}</p>
             <div>
                 {jobCards}

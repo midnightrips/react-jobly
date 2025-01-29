@@ -1,26 +1,29 @@
 import React from "react";
-import JoblyApi from "./api";
-import { useParams } from "react-router";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
+import { Link } from "react-router-dom";
+import "./CompanyCard.css";
 
-/** CompanyCard: displays info about a specific company (in CompanyList) */
+/** Show limited information about a company
+ *
+ * Is rendered by CompanyList to show a "card" for each company.
+ *
+ * CompanyList -> CompanyCard
+ */
 
-const CompanyCard = () => {
-    const { handle } = useParams();
-
-    const company = JoblyApi.getCompany(handle);
+function CompanyCard({ name, description, logoUrl, handle }) {
+    console.debug("CompanyCard", logoUrl);
 
     return (
-        <section>
-            <Card>
-                <CardBody>
-                    <CardTitle className="font-weight-bold text-center">
-                        {company.name}
-                    </CardTitle>
-                    <CardText className="font-italic">{company.description}</CardText>
-                </CardBody>
-            </Card>
-        </section>
+        <Link className="CompanyCard card" to={`/companies/${handle}`}>
+            <div className="card-body">
+                <h6 className="card-title text-start">
+                    {name}
+                    {logoUrl && <img src={logoUrl}
+                        alt={name}
+                        className="float-end ms-5" />}
+                </h6>
+                <p className="text-start"><small>{description}</small></p>
+            </div>
+        </Link>
     );
 }
 

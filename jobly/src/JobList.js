@@ -9,7 +9,6 @@ import UserContext from "./UserContext";
 const JobList = () => {
     const [jobs, setJobs] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-
     const { curr_user } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -46,33 +45,37 @@ const JobList = () => {
     };
 
     const jobCards = jobs.map(job => (
-        <JobCard
-            key={job.id}
-            id={job.id}
-            title={job.title}
-            salary={job.salary}
-            equity={job.equity}
-            companyName={job.companyName}
-        />
+        <div>
+            <JobCard
+                key={job.id}
+                id={job.id}
+                title={job.title}
+                salary={job.salary}
+                equity={job.equity}
+                companyName={job.companyName}
+            />
+        </div>
     ));
 
     return (
-        <div>
+        <div className="col-md-8 offset-md-2">
             <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        onChange={handleChange}
-                        className="form-control form-control-lg"
-                        name="searchTerm"
-                        placeholder="Enter search term.."
-                    />
-                </div>
-                <div>
-                    <button
-                        type="submit"
-                        className="btn btn-lg btn-primary">
-                        Submit
-                    </button>
+                <div className="row justify-content-center gx-0">
+                    <div className="col-8">
+                        <input
+                            onChange={handleChange}
+                            className="form-control form-control-lg"
+                            name="searchTerm"
+                            placeholder="Enter search term.."
+                        />
+                    </div>
+                    <div className="col-auto">
+                        <button
+                            type="submit"
+                            className="btn btn-lg btn-primary">
+                            Submit
+                        </button>
+                    </div>
                 </div>
             </form>
             {jobCards}

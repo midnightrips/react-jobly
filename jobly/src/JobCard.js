@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
+import { Card, CardBody, CardTitle } from "reactstrap";
 import JoblyApi from "./api";
 import UserContext from "./UserContext";
+import "./JobCard.css";
 
 /** Displays info about a single job */
 
 const JobCard = ({ id, title, salary, equity, companyName }) => {
     const [applied, setApplied] = useState(false);
-
     const { curr_user } = useContext(UserContext);
 
     useEffect(() => {
@@ -23,28 +23,29 @@ const JobCard = ({ id, title, salary, equity, companyName }) => {
             console.error("Error applying to job", err);
         }
     };
-    // need to change the following so if it's in company detail page it doesn't show company name
+
+    const formatSalary = (salary) => {
+        if (typeof salary !== "number" || isNaN(salary)) return "N/A";
+        return `$${salary.toLocaleString("en-US")}`;
+    };
+
     return (
         <section>
-            <Card id={id}>
-                <CardBody>
-                    <CardTitle className="font-weight-bold text-center">
-                        {title}
+            <Card id={id} className="JobCard card">
+                <CardBody className="card-body">
+                    <CardTitle className="font-weight-bold text-start card-title">
+                        <b>{title}</b>
                     </CardTitle>
-                    <CardText className="font-italic">
-                        {companyName}
-                    </CardText>
-                    <ul>
-                        <li>Salary: {salary}</li>
-                        <li>Equity: {equity}</li>
-                    </ul>
-                    {applied ?
-                        <button disabled>Applied</button>
-                        :
-                        <form onSubmit={gatherInput}>
-                            <button>Apply</button>
-                        </form>
-                    }
+                    <p className="text-start"><i>{companyName}</i></p>
+                    {salary && <div className="text-start"><small >Salary: {formatSalary(salary)}</small></div>}
+                    {equity !== undefined && <div className="text-start"><small>Equity: {equity}</small></div>}
+                    <button
+                        className="btn btn-danger fw-bold text-uppercase float-end"
+                        onClick={gatherInput}
+                        disabled={applied}
+                    >
+                        {applied ? "Applied" : "Apply"}
+                    </button>
                 </CardBody>
             </Card>
         </section>

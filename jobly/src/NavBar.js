@@ -11,26 +11,26 @@ function NavBar({ curr_user }) {
                     Jobly
                 </NavLink>
                 {curr_user ?
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
+                    <Nav className="navbar-nav ms-auto" navbar>
+                        <NavItem className="nav-item me-4">
                             <NavLink to="/companies">Companies</NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="nav-item me-4">
                             <NavLink to="/jobs">Jobs</NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="nav-item me-4">
                             <NavLink to="/profile">Profile</NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="nav-item me-4">
                             <NavLink to="/logout">{`Logout ${curr_user.username}`}</NavLink>
                         </NavItem>
                     </Nav>
                     :
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
+                    <Nav className="navbar-nav ms-auto" navbar>
+                        <NavItem className="nav-item me-4">
                             <NavLink to="/login">Login</NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="nav-item me-4">
                             <NavLink to="/signup">Signup</NavLink>
                         </NavItem>
                     </Nav>
